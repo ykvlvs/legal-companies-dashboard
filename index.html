@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Юридические компании России — рейтинги и сайты</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="hero" id="top">
+    <div class="hero-inner">
+      <p class="eyebrow">ZARLAW / RESEARCH DASHBOARD</p>
+      <h1>Юридические компании России</h1>
+      <p class="lead">Рейтинги, digital-фокус, официальные сайты и визуальная проверка страниц компаний.</p>
+      <nav class="nav" aria-label="Основная навигация">
+        <a href="#overview">Обзор</a><a href="#companies">Компании</a><a href="#ratings">Рейтинги</a><a href="#screenshots">Скриншоты</a><a href="#errors">Ошибки</a><a href="#reports">Источники</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="overview" class="section">
+      <div class="section-heading"><div><p class="eyebrow">OVERVIEW</p><h2>Единый обзор</h2></div><p id="generatedAt" class="muted"></p></div>
+      <div id="stats" class="stats"></div>
+      <div class="intro-grid"><div class="panel"><h3>Что здесь собрано</h3><p>549 компаний из открытых рейтингов, профильный срез по IT и digital, официальные сайты, источники рейтингов и статусы автоматических полноразмерных скриншотов.</p></div><div class="panel accent"><h3>Как читать статусы</h3><p><span class="status ready">Готово</span> — изображение сохранено; <span class="status error">Ошибка</span> — сайт не ответил или заблокировал загрузку; <span class="status no_site">Нет сайта</span> — URL не найден в исходной базе.</p></div></div>
+    </section>
+
+    <section id="companies" class="section">
+      <div class="section-heading"><div><p class="eyebrow">COMPANIES</p><h2>Компании</h2></div><p id="companyCount" class="muted"></p></div>
+      <div class="filters panel"><label>Поиск<input id="search" type="search" placeholder="Название компании или домен"></label><label>Фокус<select id="focus"><option value="">Все</option><option>Основной digital-фокус</option><option>Связанный фокус</option></select></label><label>Статус<select id="status"><option value="">Все</option><option value="ready">Есть скриншот</option><option value="not_attempted">Сайт есть, скриншот не запускался</option><option value="error">Ошибка скриншота</option><option value="no_site">Нет сайта</option></select></label><label>Диапазон скриншота<select id="range"><option value="">Все</option><option>1–100</option><option>101–200</option><option>201–300</option><option>301–400</option></select></label><label>Рейтинг<select id="rating"><option value="">Все</option><option value="pravo">Есть позиции Право-300</option><option value="kommersant">Есть позиции Коммерсанта</option><option value="rbc">Есть профиль РБК</option></select></label></div>
+      <div id="companyGrid" class="company-grid"></div>
+    </section>
+
+    <section id="ratings" class="section"><div class="section-heading"><div><p class="eyebrow">RANKINGS</p><h2>Рейтинги и отчёты</h2></div></div><div id="ratingCards" class="rating-grid"></div></section>
+    <section id="screenshots" class="section"><div class="section-heading"><div><p class="eyebrow">SCREENSHOTS</p><h2>Галереи скриншотов</h2></div></div><div id="gallery" class="gallery-grid"></div></section>
+    <section id="errors" class="section"><div class="section-heading"><div><p class="eyebrow">QA LOG</p><h2>Недоступные сайты</h2></div><p class="muted">Ошибки загрузки из журналов Playwright</p></div><div id="errorList" class="error-list"></div></section>
+    <section id="reports" class="section"><div class="section-heading"><div><p class="eyebrow">SOURCES</p><h2>Источники и файлы</h2></div></div><div id="reportList" class="report-list"></div></section>
+  </main>
+  <footer class="footer">ZARLAW · статический исследовательский дашборд</footer>
+  <script src="app.js"></script>
+</body>
+</html>
