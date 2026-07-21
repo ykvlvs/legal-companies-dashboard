@@ -3,6 +3,7 @@ const $ = (selector) => document.querySelector(selector);
 const esc = (value) => String(value ?? "").replace(/[&<>'"]/g, (char) => ({"&":"&amp;","<":"&lt;",">":"&gt;","'":"&#39;",'"':"&quot;"}[char]));
 const clean = (value) => String(value ?? "").trim();
 const statusText = { ready:"Есть скриншот", error:"Ошибка скриншота", no_site:"Нет сайта", not_attempted:"Сайт есть, скриншот не запускался" };
+const validUrl = (value) => /^https?:\/\//i.test(clean(value)) ? clean(value) : "";
 
 function renderStats(data){
   const stats = [[data.stats.companies,"компаний в базе"],[data.stats.sites,"официальных сайтов"],[data.stats.digitalCompanies,"основной digital-фокус"],[data.stats.screenshots,"скриншотов сохранено"],[data.stats.screenshotErrors,"ошибок скриншотов"],[data.stats.companiesWithScreenshots,"компаний с изображением"]];
@@ -34,8 +35,9 @@ function renderCompanies(){
   if(!companies.length){ $("#companyGrid").innerHTML = `<div class="empty">По заданным фильтрам компании не найдены.</div>`; return; }
   $("#companyGrid").innerHTML = companies.map(company => {
     const screenshot = company.screenshots.find(item => item.image);
+    const siteUrl = validUrl(company.siteText) || validUrl(company.site);
     const rating = [`Право-300: ${company.pravoNominations || "—"}`,`Коммерсантъ: ${company.kommersantNominations || "—"}`].join(" · ");
-    return `<article class="company-card"><div class="company-top"><span class="rank">#${company.rank}</span><span class="status ${company.screenshotStatus}">${statusText[company.screenshotStatus]}</span></div><h3>${esc(company.name)}</h3><div class="tags">${company.focus ? `<span class="tag">${esc(company.focus)}</span>` : ""}${company.rbc ? `<span class="tag">РБК</span>` : ""}</div><p>${esc(rating)}</p>${company.site ? `<p><a href="${esc(company.site)}" target="_blank" rel="noreferrer">${esc(company.site)}</a></p>` : "<p>Официальный сайт не найден в базе.</p>"}<div class="card-bottom"><p>${esc(company.digitalPositions || "")}</p></div>${screenshot ? `<a href="${esc(screenshot.image)}" target="_blank"><img class="screenshot-thumb" src="${esc(screenshot.image)}" alt="Скриншот сайта ${esc(company.name)}" loading="lazy"></a>` : ""}</article>`;
+    return `<article class="company-card"><div class="company-top"><span class="rank">#${company.rank}</span><span class="status ${company.screenshotStatus}">${statusText[company.screenshotStatus]}</span></div><h3>${esc(company.name)}</h3><div class="tags">${company.focus ? `<span class="tag">${esc(company.focus)}</span>` : ""}${company.rbc ? `<span class="tag">РБК</span>` : ""}</div><p>${esc(rating)}</p>${siteUrl ? `<p><a href="${esc(siteUrl)}" target="_blank" rel="noreferrer">Открыть сайт ↗</a></p>` : "<p>Официальный сайт не найден в базе.</p>"}<div class="card-bottom"><p>${esc(company.digitalPositions || "")}</p></div>${screenshot ? `<a href="${esc(screenshot.image)}" target="_blank"><img class="screenshot-thumb" src="${esc(screenshot.image)}" alt="Скриншот сайта ${esc(company.name)}" loading="lazy"></a>` : ""}</article>`;
   }).join("");
 }
 
