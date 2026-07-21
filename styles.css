@@ -2,3 +2,5 @@
  .hero{background:none;color:var(--ink)}
  .hero .lead{color:var(--muted)}
  .overview-description{font-weight:400}
+ #overview{padding-top:24px}
+ #overview .section-heading{margin-bottom:32px}
