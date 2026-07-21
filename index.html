@@ -9,7 +9,6 @@
 <body>
   <header class="hero" id="top">
     <div class="hero-inner">
-      <p class="eyebrow">ZARLAW / RESEARCH DASHBOARD</p>
       <h1>Юридические компании России</h1>
       <p class="lead">Рейтинги, digital-фокус, официальные сайты и визуальная проверка страниц компаний.</p>
     </div>
@@ -17,13 +16,13 @@
 
   <main class="container">
     <section id="overview" class="section">
-      <div class="section-heading"><div><p class="eyebrow">OVERVIEW</p><h2>Что здесь собрано<br>549 компаний из открытых рейтингов, профильный срез по IT и digital, официальные сайты, источники рейтингов и статусы автоматических полноразмерных скриншотов.</h2></div><p id="generatedAt" class="muted"></p></div>
+      <div class="section-heading"><div><p class="eyebrow">OVERVIEW</p><h2>Что здесь собрано<br><span class="overview-description">549 компаний из открытых рейтингов, профильный срез по IT и digital, официальные сайты, источники рейтингов и статусы автоматических полноразмерных скриншотов.</span></h2></div></div>
       <div id="stats" class="stats"></div>
       <div class="intro-grid"><div class="panel accent"><h3>Как читать статусы</h3><p><span class="status ready">Готово</span> — изображение сохранено; <span class="status error">Ошибка</span> — сайт не ответил или заблокировал загрузку; <span class="status no_site">Нет сайта</span> — URL не найден в исходной базе.</p></div></div>
     </section>
 
     <section id="companies" class="section">
-      <div class="section-heading"><div><p class="eyebrow">COMPANIES</p><h2>Компании</h2></div><p id="companyCount" class="muted"></p></div>
+      <div class="section-heading"><div><h2>Компании</h2></div><p id="companyCount" class="muted"></p></div>
       <div class="filters panel"><label>Поиск<input id="search" type="search" placeholder="Название компании или домен"></label><label>Фокус<select id="focus"><option value="">Все</option><option>Основной digital-фокус</option><option>Связанный фокус</option></select></label><label>Статус<select id="status"><option value="">Все</option><option value="ready">Есть скриншот</option><option value="not_attempted">Сайт есть, скриншот не запускался</option><option value="error">Ошибка скриншота</option><option value="no_site">Нет сайта</option></select></label><label>Диапазон скриншота<select id="range"><option value="">Все</option><option>1–100</option><option>101–200</option><option>201–300</option><option>301–400</option></select></label><label>Рейтинг<select id="rating"><option value="">Все</option><option value="pravo">Есть позиции Право-300</option><option value="kommersant">Есть позиции Коммерсанта</option><option value="rbc">Есть профиль РБК</option></select></label></div>
       <div id="companyGrid" class="company-grid"></div>
     </section>
