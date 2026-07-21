@@ -78,7 +78,7 @@ async function init(){
     renderStats(state.data); renderCompanies(); renderRatings(state.data); renderGallery(state.data); renderErrors(state.data); renderReports(state.data);
     ["search","focus","status","range","rating"].forEach(id=>$("#"+id).addEventListener("input",renderCompanies));
     window.addEventListener("resize",renderCompanies);
-  }catch(error){ document.querySelector("main").innerHTML = `<div class="empty">Не удалось загрузить manifest.json. Запустите локальный сервер из папки outputs: <code>python3 -m http.server 8000</code>.</div>`; console.error(error); }
+  }catch(error){ document.querySelector("main").innerHTML = `<div class="empty">Не удалось загрузить manifest.json. Запустите локальный сервер из корня проекта: <code>python3 -m http.server 8000</code>.</div>`; console.error(error); }
 }
 
 async function loadManifest(){
