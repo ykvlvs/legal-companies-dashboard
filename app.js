@@ -28,17 +28,26 @@ function companyMatches(company){
   return true;
 }
 
+function companyColumnCount(){
+  if(window.innerWidth <= 620) return 1;
+  if(window.innerWidth <= 1000) return 2;
+  return 3;
+}
+
 function renderCompanies(){
   const data = state.data;
   const companies = data.companies.filter(companyMatches);
   $("#companyCount").textContent = `Показано: ${companies.length} из ${data.companies.length}`;
   if(!companies.length){ $("#companyGrid").innerHTML = `<div class="empty">По заданным фильтрам компании не найдены.</div>`; return; }
-  $("#companyGrid").innerHTML = companies.map(company => {
+  const cards = companies.map(company => {
     const screenshot = company.screenshots.find(item => item.image);
     const siteUrl = validUrl(company.siteText) || validUrl(company.site);
     const rating = [`Право-300: ${company.pravoNominations || "—"}`,`Коммерсантъ: ${company.kommersantNominations || "—"}`].join(" · ");
     return `<article class="company-card"><div class="company-top"><span class="rank">#${company.rank}</span><span class="status ${company.screenshotStatus}">${statusText[company.screenshotStatus]}</span></div><h3>${esc(company.name)}</h3><div class="tags">${company.focus ? `<span class="tag">${esc(company.focus)}</span>` : ""}${company.rbc ? `<span class="tag">РБК</span>` : ""}</div><p>${esc(rating)}</p>${siteUrl ? `<p><a href="${esc(siteUrl)}" target="_blank" rel="noreferrer">Открыть сайт ↗</a></p>` : "<p>Официальный сайт не найден в базе.</p>"}<div class="card-bottom"><p>${esc(company.digitalPositions || "")}</p></div>${screenshot ? `<a href="${esc(screenshot.image)}" target="_blank"><img class="screenshot-thumb" src="${esc(screenshot.image)}" alt="Скриншот сайта ${esc(company.name)}" loading="lazy"></a>` : ""}</article>`;
-  }).join("");
+  });
+  const columns = Array.from({length:companyColumnCount()},()=>[]);
+  cards.forEach((card,index)=>columns[index % columns.length].push(card));
+  $("#companyGrid").innerHTML = columns.map(column=>`<div class="company-column">${column.join("")}</div>`).join("");
 }
 
 function renderRatings(data){
@@ -64,6 +73,7 @@ async function init(){
     state.data = await loadManifest();
     renderStats(state.data); renderCompanies(); renderRatings(state.data); renderGallery(state.data); renderErrors(state.data); renderReports(state.data);
     ["search","focus","status","range","rating"].forEach(id=>$("#"+id).addEventListener("input",renderCompanies));
+    window.addEventListener("resize",renderCompanies);
   }catch(error){ document.querySelector("main").innerHTML = `<div class="empty">Не удалось загрузить manifest.json. Запустите локальный сервер из папки outputs: <code>python3 -m http.server 8000</code>.</div>`; console.error(error); }
 }
 
