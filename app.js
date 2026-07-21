@@ -11,7 +11,7 @@ const renderDigitalPositions = (value) => {
 const renderScreenshotStatus = (status) => status === "ready" ? "" : `<span class="status ${status}">${statusText[status]}</span>`;
 
 function renderStats(data){
-  const stats = [[data.stats.companies,"компаний в базе"],[data.stats.sites,"официальных сайтов"],[data.stats.digitalCompanies,"основной digital-фокус"],[data.stats.screenshots,"скриншотов сохранено"],[data.stats.screenshotErrors,"ошибок скриншотов"],[data.stats.companiesWithScreenshots,"компаний с изображением"]];
+  const stats = [[data.stats.companies,"компаний в базе"],[data.stats.sites,"официальных сайтов"],[data.stats.digitalCompanies,"основной digital-фокус"],[data.stats.companiesWithScreenshots,"компаний с изображением"],[data.stats.screenshots,"скриншотов сохранено"],[data.stats.screenshotErrors,"ошибок скриншотов"]];
   $("#stats").innerHTML = stats.map(([value,label])=>`<div class="stat"><strong>${value}</strong><span>${label}</span></div>`).join("");
   $("#generatedAt").textContent = `Обновлено: ${new Date(data.generatedAt).toLocaleString("ru-RU")}`;
 }
